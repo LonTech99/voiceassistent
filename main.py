@@ -6,7 +6,6 @@ def record_audio():
 
     with sr.Microphone() as source:
         audio = r.listen(source)
-        voice_data = ''
         try:
             voice_data = r.recognize_google(audio)
             print(voice_data)
@@ -15,6 +14,7 @@ def record_audio():
         except sr.RequestError:
             print('Sorry, my speech service is down')
 
+            
+
 print('say something')
 voice_data = record_audio()
-print(voice_data)    
