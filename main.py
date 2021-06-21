@@ -12,6 +12,10 @@ class person:
     def setName(self, name):
         self.name = name
 
+    time = ''
+    def setTime(self, time):
+        self.time = time
+
 def there_exists(terms):
     for term in terms:
         if term in voice_data:
@@ -46,12 +50,37 @@ def alexis_speak(audio_string):
 def respond(voice_data):
     # 1: greeting
     if there_exists(['hey','hi','hello', 'hallo']):
-        greetings = [f"Hallo, welkom in de booth van de gemeente rotterdam. hier kunt u uw gemeente zaken regelen. Als u meer informatie wilt over de booth kunt u om hulp vragen. hoe kan ik u helpen{person_obj.name}", f"Goedendag. welkom in de booth van de gemeente rotterdam. hier kunt u uw gemeente zaken regelen. Als u meer informatie wilt over de booth kunt u om hulp vragen. Kan ik u ergens mee helpen? {person_obj.name}"]
+        greetings = [f"Hallo, welkom in de booth van de gemeente rotterdam. Wat is uw naam?", "goedendag, welkom in de booth van de gemeente rotterdam. Wat is uw naam?", "Hallo meneer/mevrouw, welkom in de booth van de gemeente rotterdam. Wat is uw naam?"]
         greet = greetings[random.randint(0,len(greetings)-1)]
         alexis_speak(greet)
 
+    if there_exists(["mijn naam is", "ik heet", "ik ben"]):
+        person_name = voice_data.split("is")[-1].strip()
+        alexis_speak(f"Welkom {person_name} in de booth van de gemeente rotterdam. U bevindt zich in één van de persoonlijke ruimtes van de Gemeente Rotterdam. Wij willen u vriendelijk vragen om niet te eten of te drinken binnen de ruimte. Wilt u gebruik maken van een spraak toelichting, spreek dan nu ja of nee in.")
+        person_obj.setName(person_name) # remember name in person object
+
+    if there_exists("nee"):
+        alexis_speak(f'De spraakassistent is uitgeschakeld. Als u mij weer wil activeren zeg dan RotterdamR')
+
+    if there_exists(["ja", "graag"]):
+        alexis_speak(f'De spraakassistent blijft ingeschakelt, De ruimte is voorzien van reliëftegels en geleidelijnen. Deze zullen u leiden naar twee zitplekken met een tafel en een computerscherm met cameravoorziening. Neem twee stappen naar voor en 1 stap naar rechts om plaats te nemen op één van de twee stoelen. De meubels zitten vast aan de ruimte en zijn gericht naar de camera toe. Zodra u plaatsneemt, recht tegen de leuning zit en naar voren kijkt, zal dit bevestigd worden met dit geluid (Ding Dong) of afgekeurd worden met dit geluid (Buzzer). Het systeem zal een gezichtsherkenning uitvoeren van 30 seconden. Wij willen u vriendelijk vragen om recht te blijven zitten en naar voren te blijven kijken tot u dit bevestigings geluid hoort (Ding-Dong). Gezichtsherkenning  wordt uitgevoerd. 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 (Ding Dong). Gezichtsherkenning is gelukt. Voor u bevindt zich een tafel met drie draaiknoppen. Als u slecht ziet of kleurenblind bent, kunt u door middel van de 1e twee knoppen links de kleuren veranderen van de lampen in de ruimte evenals het dempen van de lampen. De middelste knop kunt u gebruiken om de tekstgrootte aan te passen en de rechterknop kunt u gebruiken voor het stellen van de schermhelderheid. In geval van een nood kunt u de noodknop binnen handbereik van uw zitplaats vinden onder de tafel of u roept nood. Wilt u de uitleg nog een keer horen? Roep dan ja uitleg of nee uitleg')
+
+    if there_exists(["uitleg", "graag uitleg"]):
+        alexis_speak(f'De ruimte is voorzien van reliëftegels en geleidelijnen. Deze zullen u leiden naar twee zitplekken met een tafel en een computerscherm met cameravoorziening. Neem twee stappen naar voor en 1 stap naar rechts om plaats te nemen op één van de twee stoelen. De meubels zitten vast aan de ruimte en zijn gericht naar de camera toe. Zodra u plaatsneemt, recht tegen de leuning zit en naar voren kijkt, zal dit bevestigd worden met dit geluid (Ding Dong) of afgekeurd worden met dit geluid (Buzzer). Het systeem zal een gezichtsherkenning uitvoeren van 30 seconden. Wij willen u vriendelijk vragen om recht te blijven zitten en naar voren te blijven kijken tot u dit bevestigings geluid hoort (Ding-Dong). Gezichtsherkenning  wordt uitgevoerd. 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 (Ding Dong). Gezichtsherkenning is gelukt. Voor u bevindt zich een tafel met drie draaiknoppen. Als u slecht ziet of kleurenblind bent, kunt u door middel van de 1e twee knoppen links de kleuren veranderen van de lampen in de ruimte evenals het dempen van de lampen. De middelste knop kunt u gebruiken om de tekstgrootte aan te passen en de rechterknop kunt u gebruiken voor het stellen van de schermhelderheid. In geval van een nood kunt u de noodknop binnen handbereik van uw zitplaats vinden onder de tafel of u roept nood. Wilt u de uitleg nog een keer horen? Roep dan uitleg. Hoe laat had u een afspraak?')
+
+    if there_exists(["Ik had een afspraak om", "ik heb een afspraak", "een afspraak om"]):
+        person_time = voice_data.split("is")[-1].strip()
+        alexis_speak(f"Bedankt {person_name} u heeft dan een afspraak om {person_time} met Jan van den berg. De digitale balie maakt verbinding met de desbetreffende ambtenaar. Even geduld alstublieft. (Ding-Dong) Er zit nu een ambtenaar voor u klaar om u te helpen. Uw camera staat aan. Wij wensen u een prettig gesprek toe!")
+        person_obj.setTime(person_time) # remember time van persoon
+    
+    
+    
+    
+    
+    
+    
     if there_exists(["uitleg","kunt u me uitleg geven","hoe ziet het eruit"]):
-        alexis_speak(f'U bevind zich in de booth van de gemeente rotterdam. Voor u staat een stoel met een beeldscherm. hierop kunt u bellen met een medewerker van de gemeente en uw gemeente zaken regelen. als u andere vragen heeft of liever niet belt met iemand dan kunt u dat aan mij laten weten')
+        alexis_speak(f'welkom in de booth van de gemeente rotterdam. U bevindt zich in één van de persoonlijke ruimtes van de Gemeente Rotterdam. Wij willen u vriendelijk vragen om niet te eten of te drinken binnen de ruimte en het schoon achter te laten. Wilt u gebruik maken van een spraak toelichting, spreek dan nu ja of nee rotterdam in')
 
     if there_exists(["niet bellen","ik wil niet bellen","geen medewerker","heb geen medewerker nodig"]):
         alexis_speak(f'Dat is goed. U kunt zelf uw zaken regelen. Mocht u nog vragen hebben dan ben ik beschikbaar')
@@ -62,11 +91,6 @@ def respond(voice_data):
             alexis_speak("Mijn naam is Gemeente Rotterdam")
         else:
             alexis_speak("mijn naam is gemeente rotterdam. wat is uw naam?")
-
-    if there_exists(["mijn naam is"]):
-        person_name = voice_data.split("is")[-1].strip()
-        alexis_speak(f"Oke, ik ga dat onthouden {person_name}")
-        person_obj.setName(person_name) # remember name in person object
 
     # 3: greeting
     if there_exists(["hoe gaat het","hoe is het met u"]):
