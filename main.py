@@ -63,7 +63,7 @@ def respond(voice_data):
         alexis_speak(f'De spraakassistent is uitgeschakeld. Als u mij weer wil activeren zeg dan RotterdamR')
 
     if there_exists(["ja", "graag"]):
-        alexis_speak(f'De spraakassistent blijft ingeschakelt, De ruimte is voorzien van reliëftegels en geleidelijnen. Deze zullen u leiden naar twee zitplekken met een tafel en een computerscherm met cameravoorziening. Neem twee stappen naar voor en 1 stap naar rechts om plaats te nemen op één van de twee stoelen. De meubels zitten vast aan de ruimte en zijn gericht naar de camera toe. Zodra u plaatsneemt, recht tegen de leuning zit en naar voren kijkt, zal dit bevestigd worden met dit geluid (Ding Dong) of afgekeurd worden met dit geluid (Buzzer). Het systeem zal een gezichtsherkenning uitvoeren van 30 seconden. Wij willen u vriendelijk vragen om recht te blijven zitten en naar voren te blijven kijken tot u dit bevestigings geluid hoort (Ding-Dong). Gezichtsherkenning  wordt uitgevoerd. 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 (Ding Dong). Gezichtsherkenning is gelukt. Voor u bevindt zich een tafel met drie draaiknoppen. Als u slecht ziet of kleurenblind bent, kunt u door middel van de 1e twee knoppen links de kleuren veranderen van de lampen in de ruimte evenals het dempen van de lampen. De middelste knop kunt u gebruiken om de tekstgrootte aan te passen en de rechterknop kunt u gebruiken voor het stellen van de schermhelderheid. In geval van een nood kunt u de noodknop binnen handbereik van uw zitplaats vinden onder de tafel of u roept nood. Wilt u de uitleg nog een keer horen? Roep dan ja uitleg of nee uitleg')
+        alexis_speak(f'De spraakassistent blijft ingeschakelt, De ruimte is voorzien van reliëftegels en geleidelijnen. Deze zullen u leiden naar twee zitplekken met een tafel en een computerscherm met cameravoorziening. Neem twee stappen naar voor en 1 stap naar rechts om plaats te nemen op één van de twee stoelen. De meubels zitten vast aan de ruimte en zijn gericht naar de camera toe. Zodra u plaatsneemt, recht tegen de leuning zit en naar voren kijkt, zal dit bevestigd worden met dit geluid {sound.play_effect} of afgekeurd worden met dit geluid (Buzzer). Het systeem zal een gezichtsherkenning uitvoeren van 30 seconden. Wij willen u vriendelijk vragen om recht te blijven zitten en naar voren te blijven kijken tot u dit bevestigings geluid hoort (Ding-Dong). Gezichtsherkenning  wordt uitgevoerd. 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 (Ding Dong). Gezichtsherkenning is gelukt. Voor u bevindt zich een tafel met drie draaiknoppen. Als u slecht ziet of kleurenblind bent, kunt u door middel van de 1e twee knoppen links de kleuren veranderen van de lampen in de ruimte evenals het dempen van de lampen. De middelste knop kunt u gebruiken om de tekstgrootte aan te passen en de rechterknop kunt u gebruiken voor het stellen van de schermhelderheid. In geval van een nood kunt u de noodknop binnen handbereik van uw zitplaats vinden onder de tafel of u roept nood. Wilt u de uitleg nog een keer horen? Roep dan ja uitleg of nee uitleg')
 
     if there_exists(["uitleg", "graag uitleg"]):
         alexis_speak(f'De ruimte is voorzien van reliëftegels en geleidelijnen. Deze zullen u leiden naar twee zitplekken met een tafel en een computerscherm met cameravoorziening. Neem twee stappen naar voor en 1 stap naar rechts om plaats te nemen op één van de twee stoelen. De meubels zitten vast aan de ruimte en zijn gericht naar de camera toe. Zodra u plaatsneemt, recht tegen de leuning zit en naar voren kijkt, zal dit bevestigd worden met dit geluid (Ding Dong) of afgekeurd worden met dit geluid (Buzzer). Het systeem zal een gezichtsherkenning uitvoeren van 30 seconden. Wij willen u vriendelijk vragen om recht te blijven zitten en naar voren te blijven kijken tot u dit bevestigings geluid hoort (Ding-Dong). Gezichtsherkenning  wordt uitgevoerd. 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 (Ding Dong). Gezichtsherkenning is gelukt. Voor u bevindt zich een tafel met drie draaiknoppen. Als u slecht ziet of kleurenblind bent, kunt u door middel van de 1e twee knoppen links de kleuren veranderen van de lampen in de ruimte evenals het dempen van de lampen. De middelste knop kunt u gebruiken om de tekstgrootte aan te passen en de rechterknop kunt u gebruiken voor het stellen van de schermhelderheid. In geval van een nood kunt u de noodknop binnen handbereik van uw zitplaats vinden onder de tafel of u roept nood. Wilt u de uitleg nog een keer horen? Roep dan uitleg. Hoe laat had u een afspraak?')
@@ -72,8 +72,6 @@ def respond(voice_data):
         person_time = voice_data.split("is")[-1].strip()
         alexis_speak(f"Bedankt {person_name} u heeft dan een afspraak om {person_time} met Jan van den berg. De digitale balie maakt verbinding met de desbetreffende ambtenaar. Even geduld alstublieft. (Ding-Dong) Er zit nu een ambtenaar voor u klaar om u te helpen. Uw camera staat aan. Wij wensen u een prettig gesprek toe!")
         person_obj.setTime(person_time) # remember time van persoon
-    
-    
     
     
     
@@ -121,13 +119,13 @@ def respond(voice_data):
         webbrowser.get().open(url)
         alexis_speak(f'Here is what I found for {search_term} on youtube')
 
-            # 3: greeting
+    # 3: greeting
     if there_exists(["gemeente wonen","gemeente leven","gemeente wonen leven"]):
         url = f"https://www.rotterdam.nl/wonen-leven/"
         webbrowser.get().open(url)
         alexis_speak(f'Dit is wat ik vond')
 
-                    # 3: greeting
+    # 3: greeting
     if there_exists(["gemeente werken","gemeente leren","gemeente werken en leren"]):
         url = f"https://www.rotterdam.nl/werken-leren/"
         webbrowser.get().open(url)
